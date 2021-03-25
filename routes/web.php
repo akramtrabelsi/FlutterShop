@@ -36,6 +36,7 @@ Route::get('test_email',function (){
 Route::group(['auth', 'user_is_admin'],function (){
     //units
    Route::get('units', '\App\Http\Controllers\UnitController@index')->name('units');
+   Route::post('units','\App\Http\Controllers\UnitController@store');
     //customers
 
 

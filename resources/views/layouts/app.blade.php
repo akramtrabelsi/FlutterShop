@@ -11,7 +11,6 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://kit.fontawesome.com/4788dde201.js" crossorigin="anonymous"></script>
 
     <!-- Fonts -->
@@ -117,5 +116,9 @@
             @yield('content')
         </main>
     </div>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" ></script>
+
+    @yield('script')
 </body>
 </html>
