@@ -6,3 +6,12 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+.delete-btn{
+    -webkit-appearance: none;
+    background-color: transparent;
+    border: none;
+    color: red;
+    position: absolute;
+    right:5px;
+}

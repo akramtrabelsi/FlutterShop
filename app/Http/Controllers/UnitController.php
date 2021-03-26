@@ -97,4 +97,10 @@ class UnitController extends Controller
     {
         //
     }
+    public function delete(Request $request){
+        $id = $request->input('unit_id');
+        Unit::destroy($id);
+        Session::flash('message','Unit has been deletes');
+        return redirect()->back();
+    }
 }
