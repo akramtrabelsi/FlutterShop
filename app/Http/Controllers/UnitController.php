@@ -42,6 +42,16 @@ class UnitController extends Controller
             'unit_name' => 'required',
             'unit_code' => 'required'
         ]);
+        $unitName = $request->input('unit_name');
+        $unitCode = $request->input('unit_code');
+
+        if (! $this->unitNameExists($unitName)){
+            return redirect()->back();
+        }
+        if (!$this->unitCodeExists($unitCode)){
+            return redirect()->back();
+        }
+
         $unit = new Unit();
 
         $unit->unit_name = $request->input('unit_name');
@@ -95,6 +105,8 @@ class UnitController extends Controller
         Session::flash('message','Unit has been deletes');
         return redirect()->back();
     }
+
+
     public function put(Request $request)
     {
         $request->validate([
@@ -102,6 +114,15 @@ class UnitController extends Controller
             'unit_id' => 'required',
             'unit_name' => 'required'
         ]);
+        $unitName = $request->input('unit_name');
+        $unitCode = $request->input('unit_code');
+
+        if (! $this->unitNameExists($unitName)){
+            return redirect()->back();
+        }
+        if (!$this->unitCodeExists($unitCode)){
+            return redirect()->back();
+        }
         $unitID = intval($request->input('unit_id'));
 
         $unit = Unit::find($unitID);
@@ -111,5 +132,31 @@ class UnitController extends Controller
         $unit->save();
         Session::flash('message', 'Unit ' . $unit->unit_name . ' has been updated');
         return redirect()->back();
+    }
+
+    private function unitNameExists($unitName)
+    {
+        $unit = Unit::where(
+            'unit_name', '=', $unitName
+        )->first();
+        if (!is_null($unit)) {
+            Session::flash('message', 'Unit Name(' . $unitName . ') already exists');
+            return false;
+
+
+        }
+        return true;
+    }
+
+    private function unitCodeExists($unitCode)
+    {
+        $unit = Unit::where(
+            'unit_code', '=', $unitCode
+        )->first();
+        if (!is_null($unit)) {
+            Session::flash('message', 'Unit Name(' . $unitCode . ') already exists');
+            return false;
+        }
+        return true;
     }
 }
