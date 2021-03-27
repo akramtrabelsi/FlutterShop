@@ -16,7 +16,8 @@ class UnitController extends Controller
     public function index()
     {
         $units = Unit::simplePaginate(env('PAGINATION',16));
-        return view('admin.units.units')->with(['units'=>$units]);
+        return view('admin.units.units')->with(['units'=>$units,'showLinks'=>true,
+        ]);
     }
 
     /**
@@ -158,5 +159,29 @@ class UnitController extends Controller
             return false;
         }
         return true;
+    }
+
+    public function search(Request $request)
+    {
+        $request->validate([
+            'unit_search'=>'required'
+        ]);
+
+        $searchTerm=$request->input('unit_search');
+
+        $units=Unit::where(
+            'unit_name' , 'LIKE','%'.$searchTerm.'%'
+        )->orwhere(
+            'unit_code','LIKE','%'.$searchTerm.'%'
+        )->get();
+
+        if(count($units)>0){
+            return view('admin.units.units')->with([
+                'units'=>$units,
+                'showLinks'=>false,
+            ]);
+        }
+        Session::flash('message','Nothing Found!!!');
+        return redirect()->back();
     }
 }

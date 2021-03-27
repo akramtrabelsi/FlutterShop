@@ -39,6 +39,7 @@ Route::group(['auth', 'user_is_admin'],function (){
    Route::post('units','\App\Http\Controllers\UnitController@store');
    Route::delete('units','\App\Http\Controllers\UnitController@delete');
    Route::PUT('units', '\App\Http\Controllers\UnitController@put');
+    Route::get('search-units/','\App\Http\Controllers\UnitController@search')->name('search-units');
     //customers
 
 
