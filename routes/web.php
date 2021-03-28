@@ -45,6 +45,10 @@ Route::group(['auth', 'user_is_admin'],function (){
 
     //categories
     Route::get('categories', '\App\Http\Controllers\CategoryController@index')->name('categories');
+    Route::post('categories','\App\Http\Controllers\CategoryController@store');
+    Route::delete('categories','\App\Http\Controllers\CategoryController@delete');
+    Route::put('categories','\App\Http\Controllers\CategoryController@put');
+    Route::get('search-categories/','\App\Http\Controllers\CategoryController@search')->name('search-categories');
     //Products
     Route::get('products', '\App\Http\Controllers\ProductController@index')->name('products');
     //tags
