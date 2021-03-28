@@ -29,9 +29,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('test_email',function (){
+/*Route::get('test_email',function (){
     return 'hello';
-})->middleware(['auth','user_is_admin','user_is_support']);
+})->middleware(['auth','user_is_admin','user_is_support']);*/
 
 Route::group(['auth', 'user_is_admin'],function (){
     //units
@@ -49,6 +49,8 @@ Route::group(['auth', 'user_is_admin'],function (){
     Route::get('products', '\App\Http\Controllers\ProductController@index')->name('products');
     //tags
     Route::get('tags','\App\Http\Controllers\TagController@index')->name('tags');
+    Route::post('tags','\App\Http\Controllers\TagController@store');
+
 
     //orders
     //payments
