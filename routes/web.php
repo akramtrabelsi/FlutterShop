@@ -39,7 +39,7 @@ Route::group(['auth', 'user_is_admin'],function (){
    Route::post('units','\App\Http\Controllers\UnitController@store');
    Route::delete('units','\App\Http\Controllers\UnitController@delete');
    Route::PUT('units', '\App\Http\Controllers\UnitController@put');
-    Route::get('search-units/','\App\Http\Controllers\UnitController@search')->name('search-units');
+   Route::get('search-units/','\App\Http\Controllers\UnitController@search')->name('search-units');
     //customers
 
 
@@ -50,6 +50,10 @@ Route::group(['auth', 'user_is_admin'],function (){
     //tags
     Route::get('tags','\App\Http\Controllers\TagController@index')->name('tags');
     Route::post('tags','\App\Http\Controllers\TagController@store');
+    Route::delete('tags','\App\Http\Controllers\TagController@delete');
+    Route::PUT('tags', '\App\Http\Controllers\TagController@put');
+    Route::get('search-tags/','\App\Http\Controllers\TagController@search')->name('search-tags');
+
 
 
     //orders
