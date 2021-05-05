@@ -10028,3 +10028,12 @@ span.buttons-span span:first-child a {
 span.buttons-span span:last-child a {
   color: #ff2a34;
 }
+
+span.product-header-title {
+  color: #a7221d;
+  text-decoration: underline;
+}
+
+a.remove-option {
+  color: #ff2a34;
+}

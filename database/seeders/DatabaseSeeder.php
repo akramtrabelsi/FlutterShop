@@ -31,6 +31,6 @@ class DatabaseSeeder extends Seeder
         //Category::factory()->count(50)->create();
         //Tag::factory()->count(150)->create();
         //Ticket::factory()->count(150)->create();
-        Unit::factory()->count(50)->create();
+        //Unit::factory()->count(50)->create();
     }
 }

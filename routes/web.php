@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,31 +34,38 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
     return 'hello';
 })->middleware(['auth','user_is_admin','user_is_support']);*/
 
-Route::group(['auth', 'user_is_admin'],function (){
+Route::group(['auth', 'user_is_admin'], function () {
     //units
-   Route::get('units', '\App\Http\Controllers\UnitController@index')->name('units');
-   Route::post('units','\App\Http\Controllers\UnitController@store');
-   Route::delete('units','\App\Http\Controllers\UnitController@delete');
-   Route::PUT('units', '\App\Http\Controllers\UnitController@put');
-   Route::get('search-units/','\App\Http\Controllers\UnitController@search')->name('search-units');
+    Route::get('units', '\App\Http\Controllers\UnitController@index')->name('units');
+    Route::post('units', '\App\Http\Controllers\UnitController@store');
+    Route::delete('units', '\App\Http\Controllers\UnitController@delete');
+    Route::PUT('units', '\App\Http\Controllers\UnitController@put');
+    Route::get('search-units/', '\App\Http\Controllers\UnitController@search')->name('search-units');
     //customers
 
 
     //categories
     Route::get('categories', '\App\Http\Controllers\CategoryController@index')->name('categories');
-    Route::post('categories','\App\Http\Controllers\CategoryController@store');
-    Route::delete('categories','\App\Http\Controllers\CategoryController@delete');
-    Route::put('categories','\App\Http\Controllers\CategoryController@put');
-    Route::get('search-categories/','\App\Http\Controllers\CategoryController@search')->name('search-categories');
+    Route::post('categories', '\App\Http\Controllers\CategoryController@store');
+    Route::delete('categories', '\App\Http\Controllers\CategoryController@delete');
+    Route::put('categories', '\App\Http\Controllers\CategoryController@put');
+    Route::get('search-categories/', '\App\Http\Controllers\CategoryController@search')->name('search-categories');
     //Products
     Route::get('products', '\App\Http\Controllers\ProductController@index')->name('products');
-    //tags
-    Route::get('tags','\App\Http\Controllers\TagController@index')->name('tags');
-    Route::post('tags','\App\Http\Controllers\TagController@store');
-    Route::delete('tags','\App\Http\Controllers\TagController@delete');
-    Route::PUT('tags', '\App\Http\Controllers\TagController@put');
-    Route::get('search-tags/','\App\Http\Controllers\TagController@search')->name('search-tags');
+    Route::get('new-product/{id?}', '\App\Http\Controllers\ProductController@newProduct')->name('new-product');
+    Route::post('new-product', '\App\Http\Controllers\ProductController@store');
+    Route::post('delete-image', '\App\Http\Controllers\ProductController@deleteImage')->name('delete-image');
 
+    Route::get('update-product/{id}', '\App\Http\Controllers\ProductController@newProduct')->name('update-product-form');
+
+    Route::get('update-product', '\App\Http\Controllers\ProductController@update')->name('update-product');
+    Route::delete('products/{id}', '\App\Http\Controllers\ProductController@delete');
+    //tags
+    Route::get('tags', '\App\Http\Controllers\TagController@index')->name('tags');
+    Route::post('tags', '\App\Http\Controllers\TagController@store');
+    Route::delete('tags', '\App\Http\Controllers\TagController@delete');
+    Route::PUT('tags', '\App\Http\Controllers\TagController@put');
+    Route::get('search-tags/', '\App\Http\Controllers\TagController@search')->name('search-tags');
 
 
     //orders
@@ -66,23 +74,21 @@ Route::group(['auth', 'user_is_admin'],function (){
 
 
     //countries
-    Route::get('countries','\App\Http\Controllers\CountryController@index')->name('countries');
+    Route::get('countries', '\App\Http\Controllers\CountryController@index')->name('countries');
     //cities
-    Route::get('cities','\App\Http\Controllers\CityController@index')->name('cities');
+    Route::get('cities', '\App\Http\Controllers\CityController@index')->name('cities');
     //states
-    Route::get('states','\App\Http\Controllers\StateController@index')->name('states');
-
-
+    Route::get('states', '\App\Http\Controllers\StateController@index')->name('states');
 
 
     //reviews
-    Route::get('reviews','\App\Http\Controllers\ReviewController@index')->name('reviews');
+    Route::get('reviews', '\App\Http\Controllers\ReviewController@index')->name('reviews');
 
     //tickets
-    Route::get('tickets','\App\Http\Controllers\TicketController@index')->name('tickets');
+    Route::get('tickets', '\App\Http\Controllers\TicketController@index')->name('tickets');
 
     //roles
-    Route::get('roles','\App\Http\Controllers\RoleController@index')->name('roles');
+    Route::get('roles', '\App\Http\Controllers\RoleController@index')->name('roles');
 });
 
 

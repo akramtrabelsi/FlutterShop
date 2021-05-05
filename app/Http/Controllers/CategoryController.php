@@ -10,99 +10,93 @@ class CategoryController extends Controller
 {
     public function index(){
         $categories = Category::simplePaginate(env('PAGINATION',16));
-        return view('admin.categories.categories')->with(['categories' => $categories, 'showLinks' => true,
+        return view('admin.categories.categories')->with(['categories'=>$categories, 'showLinks'=>true,]);
+    }
+    public function store(Request $request)
+    {
+
+        $request->validate([
+            'category_name' => 'required',
         ]);
+        $categoryName = $request->input('category_name');
+
+        if (! $this->categoryNameExists($categoryName)){
+            return redirect()->back();
+        }
+
+        $category = new Category();
+
+        $category->name = $request->input('category_name');
+        $category->save();
+        Session::flash('message', 'Category '.$category->name. ' has been added' );
+        return redirect()->back();
+
+
     }
     private function categoryNameExists($categoryName)
     {
         $category = Category::where(
-            'name', '=', $categoryName
-        )->get();
-        if (count($category) > 0) {
-            return true;
-        }
-        return false;
-    }
+            'category', '=', $categoryName
+        )->first();
+        if (!is_null($category)) {
+            Session::flash('message', 'Category Name(' . $categoryName . ') already exists');
+            return false;
 
-    public function store(Request $request)
+
+        }
+        return true;
+    }
+    public function search(Request $request)
     {
         $request->validate([
-            'category_name' => 'required',
-            'category_image' => 'required',
-            'image_direction' => 'required',
+            'category_search'=>'required'
         ]);
-        $categoryName = $request->input('category_name');
-        if ($this->categoryNameExists($categoryName)) {
-            Session::flash('message', 'category name already exists');
-            return back();
-        }
 
-        $category = new Category();
-        $category->name = $categoryName;
-        $category->image_direction = $request->input('image_direction');
-        if ($request->hasFile('category_images')) {
-            $image = $request->file('category_images');
-            $path = $image->store('public');
-            $category->image_url = $path;
-        }
-        $category->save();
+        $searchTerm=$request->input('category_search');
 
-        Session::flash('message', 'Category has been added');
-        return back();
+        $categories=Category::where(
+            'category' , 'LIKE','%'.$searchTerm.'%'
+        )->get();
+
+        if(count($categories)>0){
+            return view('admin.categories.categories')->with([
+                'categories'=>$categories,
+                'showLinks'=>false,
+            ]);
+        }
+        Session::flash('message','Nothing Found!!!');
+        return redirect()->back();
     }
 
-    public function update(Request $request)
+    public function put(Request $request)
     {
         $request->validate([
             'category_id' => 'required',
             'category_name' => 'required'
         ]);
-        $categoryname = $request->input('category_name');
-        $categoryID = $request->input('category_id');
-        if ($this->categoryNameExists($categoryname)) {
-            Session::flash('message', 'Category name already exist');
-            return back();
+        $categoryName = $request->input('category_name');
+
+        if (! $this->categoryNameExists($categoryName)){
+            return redirect()->back();
         }
+
+        $categoryID = intval($request->input('category_id'));
 
         $category = Category::find($categoryID);
-        $category->name = $categoryname;
+
+        $category->name = $request->input('category_name');
         $category->save();
-        Session::flash('message', 'Category has been updated');
-        return back();
-
+        Session::flash('message', 'Category ' . $category->name . ' has been updated');
+        return redirect()->back();
     }
-
-    public function delete(Request $request)
-    {
-        $request->validate([
-            'category_id' => 'required'
-        ]);
-        $catID = $request->input('category_id');
-        Category::destroy($catID);
-        Session::flash('message', 'Category has been deleted');
-        return back();
-    }
-
-    public function search(Request $request)
-    {
-        $request->validate([
-            'category_search' => 'required'
-        ]);
-
-        $searchTerm = $request->input('category_search');
-
-        $categories = Category::where(
-            'name', 'LIKE', '%' . $searchTerm . '%'
-
-        )->get();
-
-        if (count($categories) > 0) {
-            return view('admin.categories.categories')->with([
-                'categories' => $categories,
-                'showLinks' => false,
-            ]);
+    public function delete(Request $request){
+        if(is_null($request->input('category_id'))||empty($request->input('category_id'))){
+            $request->flash('message', 'Category ID is required');
+            return redirect()->back();
         }
-        Session::flash('message', 'Nothing Found!!!');
+        $id = $request->input('category_id');
+        Category::destroy($id);
+        Session::flash('message','Category has been deletes');
         return redirect()->back();
     }
 }

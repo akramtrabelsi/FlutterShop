@@ -11,4 +11,10 @@ class Unit extends Model
         'unit_code', 'unit_name',
         ];
     use HasFactory;
+    public function product(){
+        return $this->hasMany(Product::class,'unit','id');
+    }
+    public function formatted(){
+        return $this->unit_name .'_'. $this->unit_code;
+    }
 }
