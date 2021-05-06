@@ -131,75 +131,93 @@
                         {{--                        /options--}}
 
                         {{--                        Image--}}
-                        {{--                        <div class="form-group col-md-12 ">--}}
-                        {{--                            <div class="row">--}}
-                        {{--                                @for($i=0;$i<6;$i++)--}}
-                        {{--                                    <div class="col-md-4 col-sm-12 mb-4">--}}
-                        {{--                                        <div class="card image-card-upload">--}}
-                        {{--                                            @if(! is_null($product->images) && count($product->images)>0)--}}
-                        {{--                                                @if(isset($product->images[$i])&& !is_null($product->images[$i]) &&  !empty($product->images[$i]))--}}
-                        {{--                                                    <a href="#" class="remove-image-upload" data-imgid="{{$product->images[$i]->id}}"--}}
-                        {{--                                                       data-removeimg="removeimg-{{$i}}" data-fileid="image-{{$i}}">--}}
-                        {{--                                                        <i--}}
-                        {{--                                                            class="fas fa-minus-circle" style="display: none"></i></a>--}}
-                        {{--                                                @else--}}
-                        {{--                                                    <a href="#" class="activate-image-upload"--}}
-                        {{--                                                       data-fileid="image-{{$i}}" id="removeimg-{{$i}}"><i--}}
-                        {{--                                                            class="fas fa-minus-circle" style="display: none"></i></a>--}}
+                        <div class="form-group col-md-12 ">
+                            <div class="row">
+                                @for($i=0; $i<6; $i++)
+                                    <div class="col-md-4 col-sm-12 mb-4">
 
-                        {{--                                                @endif--}}
-                        {{--                                            @endif--}}
+                                        <div class="card image-card-upload">
+                                            <a href="#" class="remove-image-upload">
+                                                <i class="fas fa-minus-circle"></i></a>
+                                            <a class="activate-image-upload" href="#" data-fileid="image-{{$i}}">
+                                                <div class="card-body" style="text-align: center">
+                                                    <i class="fas fa-image"></i>
+                                                </div>
+                                            </a>
+                                            <input name="product_images[]" type="file"
+                                                   class="form-control-file image-file-upload"
+                                                   id="image-{{$i}}">
+                                        </div>
 
+                                    </div>
+                                @endfor
+                            </div>
+                        </div>
+{{--                        <div class="form-group col-md-12 ">--}}
+{{--                            <div class="row">--}}
+{{--                                @for($i=0;$i<6;$i++)--}}
+{{--                                    <div class="col-md-4 col-sm-12 mb-4">--}}
+{{--                                        <div class="card image-card-upload">--}}
+{{--                                            @if(! is_null($product->images) && count($product->images)>0)--}}
+{{--                                                @if(isset($product->images[$i])&& !is_null($product->images[$i]) &&  !empty($product->images[$i]))--}}
+{{--                                                    <a href="#" class="remove-image-upload"--}}
+{{--                                                       data-imgid="{{$product->images[$i]->id}}"--}}
+{{--                                                       data-removeimg="removeimg-{{$i}}" data-fileid="image-{{$i}}">--}}
+{{--                                                        <i--}}
+{{--                                                            class="fas fa-minus-circle" style="display: none"></i></a>--}}
+{{--                                                @else--}}
+{{--                                                    <a href="#" class="activate-image-upload"--}}
+{{--                                                       data-fileid="image-{{$i}}" id="removeimg-{{$i}}"><i--}}
+{{--                                                            class="fas fa-minus-circle" style="display: none"></i></a>--}}
 
-                        {{--                                            @if(! is_null($product->images) && count($product->images)>0)--}}
-                        {{--                                                @if(isset($product->images[$i])&& !is_null($product->images[$i]) &&  !empty($product->images[$i]))--}}
-
-                        {{--                                                    <img id="{{'iimage-'. $i}}"--}}
-                        {{--                                                         src="{{asset($product->images[$i]->url)}}"--}}
-                        {{--                                                         class="card-img-top" alt="">--}}
-                        {{--                                                @endif--}}
-                        {{--                                            @endif--}}
-
-                        {{--                                            <div class="card-body" style="text-align: center">--}}
-                        {{--                                                @if(! is_null($product->images) && count($product->images)>0)--}}
-                        {{--                                                    @if(isset($product->images[$i])&& !is_null($product->images[$i]) &&  !empty($product->images[$i]))--}}
-                        {{--                                                        <i class="fas fa-image" style="display: none"></i>--}}
-                        {{--                                                    @else--}}
-                        {{--                                                        <i class="fas fa-image"></i>--}}
-
-                        {{--                                                    @endif--}}
-                        {{--                                                @else--}}
-                        {{--                                                    <i class="fas fa-image"></i>--}}
-
-                        {{--                                                @endif--}}
-
-                        {{--                                            </div>--}}
-                        {{--                                            @if(! is_null($product->images) && count($product->images)>0)--}}
-                        {{--                                                @if(isset($product->images[$i])&& !is_null($product->images[$i]) &&  !empty($product->images[$i]))--}}
-                        {{--                                                    <input name="product_images[]" type="file"--}}
-                        {{--                                                           class="form-control-file image-file-upload"--}}
-                        {{--                                                           id="image-{{$i}}" value={{asset($product->images[$i])}}>--}}
-                        {{--                                                @else--}}
-                        {{--                                                    <input name="product_images[]" type="file"--}}
-                        {{--                                                           class="form-control-file image-file-upload"--}}
-                        {{--                                                           id="image-{{$i}}" value={{asset($product->images[$i])}}>--}}
-                        {{--                                                @endif--}}
-                        {{--                                            @else--}}
-                        {{--                                                <input name="product_images[]" type="file"--}}
-                        {{--                                                       class="form-control-file image-file-upload"--}}
-                        {{--                                                       id="image-{{$i}}" value={{asset($product->images[$i])}}>--}}
-                        {{--                                            @endif--}}
+{{--                                                @endif--}}
+{{--                                            @endif--}}
 
 
-                        {{--                                        </div>--}}
-                        {{--                                    </div>--}}
-                        {{--                                @endfor--}}
+{{--                                            @if(! is_null($product->images) && count($product->images)>0)--}}
+{{--                                                @if(isset($product->images[$i])&& !is_null($product->images[$i]) &&  !empty($product->images[$i]))--}}
 
-                        {{--                            </div>--}}
+{{--                                                    <img id="{{'iimage-'. $i}}"--}}
+{{--                                                         src="{{asset($product->images[$i]->url)}}"--}}
+{{--                                                         class="card-img-top" alt="">--}}
+{{--                                                @endif--}}
+{{--                                            @endif--}}
 
-                        {{--                        </div>--}}
-                        {{--                    </div>--}}
+{{--                                            <div class="card-body" style="text-align: center">--}}
+{{--                                                @if(! is_null($product->images) && count($product->images)>0)--}}
+{{--                                                    @if(isset($product->images[$i])&& !is_null($product->images[$i]) &&  !empty($product->images[$i]))--}}
+{{--                                                        <i class="fas fa-image" style="display: none"></i>--}}
+{{--                                                    @else--}}
+{{--                                                        <i class="fas fa-image"></i>--}}
 
+{{--                                                    @endif--}}
+{{--                                                @else--}}
+{{--                                                    <i class="fas fa-image"></i>--}}
+
+{{--                                                @endif--}}
+
+{{--                                            </div>--}}
+{{--                                            @if(! is_null($product->images) && count($product->images)>0)--}}
+{{--                                                @if(isset($product->images[$i])&& !is_null($product->images[$i]) &&  !empty($product->images[$i]))--}}
+{{--                                                    <input name="product_images[]" type="file"--}}
+{{--                                                           class="form-control-file image-file-upload"--}}
+{{--                                                           id="image-{{$i}}" value={{asset($product->images[$i])}}>--}}
+{{--                                                @else--}}
+{{--                                                    <input name="product_images[]" type="file"--}}
+{{--                                                           class="form-control-file image-file-upload"--}}
+{{--                                                           id="image-{{$i}}" value={{asset($product->images[$i])}}>--}}
+{{--                                                @endif--}}
+{{--                                            @else--}}
+{{--                                                <input name="product_images[]" type="file"--}}
+{{--                                                       class="form-control-file image-file-upload"--}}
+{{--                                                       id="image-{{$i}}" value={{asset($product->images[$i])}}>--}}
+{{--                                            @endif--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                @endfor--}}
+
+{{--                            </div>--}}
+{{--                        </div>--}}
 
                         {{--                        /Images--}}
 
@@ -270,7 +288,7 @@
         @endif
     @endif
     <script>
-        //var imageDelete='{{route('delete-image')}}'
+        {{--//var imageDelete='{{route('delete-image')}}'--}}
     </script>
 
 
@@ -285,7 +303,7 @@
             var $optionWindow = $('#options-window');
             var addOptionBtn = $('.add-option-btn');
             var $optionsTable = $('#options-table');
-            //var $activateImageUpload = $('.activate-image-upload');
+            var $activateImageUpload = $('.activate-image-upload');
             addOptionBtn.on('click', function (e) {
                 e.preventDefault();
                 $optionWindow.modal('show');
@@ -332,21 +350,21 @@
                 );
                 $optionValue.val('')
             });
-            // function readURL(input, imageID) {
-            //     if (input.files && input.files[0]) {
-            //         var reader = new FileReader();
-            //         reader.onload = function (e) {
-            //             $('#' + imageID).attr('src', e.target.result);
-            //         };
-            //         reader.readAsDataURL(input.files[0]); // convert to base64 string
-            //     }
-            // }
-            // function resetFileUpload(fileUploadID, imageID, $eI, $eD) {
-            //     $('#' + imageID).attr('src', '');
-            //     $eI.fadeIn();
-            //     $eD.fadeOut();
-            //     $('#' + fileUploadID).val('');
-            // }
+            function readURL(input, imageID) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#' + imageID).attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(input.files[0]); // convert to base64 string
+                }
+            }
+            function resetFileUpload(fileUploadID, imageID, $eI, $eD) {
+                $('#' + imageID).attr('src', '');
+                $eI.fadeIn();
+                $eD.fadeOut();
+                $('#' + fileUploadID).val('');
+            }
             // $activateImageUpload.on('click', function (e) {
             //     e.preventDefault();
             //     var $fileUploadID = $(this).data('fileid');
@@ -383,6 +401,26 @@
             //         method:post
             //     });
             //})
+            $activateImageUpload.on('click', function (e) {
+                e.preventDefault();
+                var fileUploadID = $(this).data('fileid');
+                // console.log('#'+$fileUploadID);
+                var me = $(this);
+                $('#'+fileUploadID).trigger('click');
+                var $imagetag = '<img id="i' + fileUploadID + '" src="" class="card-img-top" alt="">';
+                $(this).append($imagetag);
+                $('#'+fileUploadID).on('change', function (){
+                    readURL(this, 'i'+fileUploadID);
+                    me.find('i').fadeOut();
+                            me.find('i').fadeOut();
+                            var $removeThisImage = me.parent().find('.remove-image-upload');
+                            $removeThisImage.fadeIn();
+                            $removeThisImage.on('click', function (e) {
+                                e.preventDefault();
+                                resetFileUpload( fileUploadID, 'i' + fileUploadID, me.find('i'), $removeThisImage);
+                            })
+                })
+            })
         })
     </script>
 
