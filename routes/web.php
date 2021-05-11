@@ -58,7 +58,7 @@ Route::group(['auth', 'user_is_admin'], function () {
 
     Route::get('update-product/{id}', '\App\Http\Controllers\ProductController@newProduct')->name('update-product-form');
 
-    Route::get('update-product', '\App\Http\Controllers\ProductController@update')->name('update-product');
+    Route::put('update-product', '\App\Http\Controllers\ProductController@update')->name('update-product');
     Route::delete('products/{id}', '\App\Http\Controllers\ProductController@delete');
     //tags
     Route::get('tags', '\App\Http\Controllers\TagController@index')->name('tags');

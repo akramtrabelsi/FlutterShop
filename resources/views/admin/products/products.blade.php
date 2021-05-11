@@ -33,7 +33,7 @@
                                             @endforeach
                                         @endif
                                         <a class="btn btn-success mt-2"
-                                           href="{{route('update-product',['id'=>$product->id])}}">update button</a>
+                                           href="{{route('update-product-form',['id'=>$product->id])}}">update button</a>
                                     </div>
                                 </div>
                             @endforeach

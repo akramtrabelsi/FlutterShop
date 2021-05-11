@@ -18,18 +18,17 @@ class ProductController extends Controller
         return view('admin.products.products')->with(['products' => $products, 'currency' => $currency]);
     }
 
-    public function newProduct($id = null)
+    public function newProduct($id = null,Request $request)
     {
         $product = null;
         if (!is_null($id)) {
             $product = Product::with([
                 'hasUnit',
                 'category',
-                //'images'
-            ])->find($id)->first();
+                'images'
+            ])->find($id);
 
         }
-
 
         $units = Unit::all();
         $categories = Category::all();
@@ -37,8 +36,7 @@ class ProductController extends Controller
             'product' => $product,
             'units' => $units,
             'categories' => $categories,
-            //'images' => $product->reviews,
-
+//            'images' => $product->images,
         ]);
     }
 
@@ -58,7 +56,6 @@ class ProductController extends Controller
             'product_total' => 'required',
             'product_category' => 'required',
         ]);
-
 
         $product = new Product();
         $this->writeProduct($request, $product, true);
@@ -83,14 +80,13 @@ class ProductController extends Controller
         $product = Product::find($productID);
         $this->writeProduct($request, $product);
 
-        Session::flash('message', 'Product has been added');
+        Session::flash('message', 'Product has been updated');
         return back();
 
     }
 
     private function writeProduct(Request $request, Product $product, $update = false)
     {
-
         $product->title = $request->input('product_title');
         $product->description = $request->input('product_description');
         $product->unit = intval($request->input('product_unit'));
@@ -119,13 +115,13 @@ class ProductController extends Controller
 
         $product->save();
 
-        if ($request->hasFile('product_images')) {
 
+        if ($request->hasFile('product_images')) {
             $images = $request->file('product_images');
             foreach ($images as $image) {
                 $path = $image->store('public');
                 $image = new Image();
-                $image->url = $path;
+                $image->url = str_replace('/public/','/storage/public/',$path);
                 $image->product_id = $product->id;
                 $image->save();
 
@@ -138,7 +134,7 @@ class ProductController extends Controller
 
     public function deleteImage(Request $request)
     {
-        $imageID = $request->input('image_id');
+        $imageID = $request->input("image_id");
         Image::destroy($imageID);
     }
 
