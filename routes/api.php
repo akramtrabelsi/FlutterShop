@@ -29,6 +29,10 @@ Route::get('countries', 'App\Http\Controllers\Api\CountryController@index');
 Route::get('countries/{id}/cities', 'App\Http\Controllers\Api\CountryController@showCities');
 Route::get('countries/{id}/states', 'App\Http\Controllers\Api\CountryController@showStates');
 
+Route::get('users', function (){
+    return \App\Http\Resources\UserFullResource::collection(\App\Models\User::paginate());
+});
+
 Route::group(['auth:api'],function (){
     // GeT Full Products
 
