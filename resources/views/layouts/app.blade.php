@@ -1,5 +1,4 @@
 <!doctype html>
-
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -11,7 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="https://kit.fontawesome.com/4788dde201.js" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -41,12 +40,9 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
@@ -59,42 +55,6 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('products') }}">
-                                        {{ __('Products') }}
-                                    </a>
-
-                                    <a class="dropdown-item" href="{{ route('reviews') }}">
-                                    {{ __('Reviews') }}
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('roles') }}">
-                                        {{ __('Roles') }}
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('categories') }}">
-                                        {{ __('Categories') }}
-                                    </a>
-
-                                    <a class="dropdown-item" href="{{ route('tags') }}">
-                                        {{ __('Tags') }}
-                                    </a>
-
-                                    <a class="dropdown-item" href="{{ route('countries') }}">
-                                        {{ __('Countries') }}
-                                    </a>
-
-                                    <a class="dropdown-item" href="{{ route('cities') }}">
-                                        {{ __('Cities') }}
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('tickets') }}">
-                                        {{ __('Tickets') }}
-                                    </a>
-
-                                    <a class="dropdown-item" href="{{ route('states') }}">
-                                        {{ __('States') }}
-                                    </a>
-
-                                    <a class="dropdown-item" href="{{ route('units') }}">
-                                        {{ __('Units') }}
-                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -112,13 +72,9 @@
             </div>
         </nav>
 
-        <main class="mt-2">
+        <main class="py-4">
             @yield('content')
         </main>
     </div>
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" ></script>
-
-    @yield('script')
 </body>
 </html>
