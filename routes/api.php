@@ -29,8 +29,13 @@ Route::get('countries', 'App\Http\Controllers\Api\CountryController@index');
 Route::get('countries/{id}/cities', 'App\Http\Controllers\Api\CountryController@showCities');
 Route::get('countries/{id}/states', 'App\Http\Controllers\Api\CountryController@showStates');
 
-//Route::post('auth/register', 'App\Http\Controllers\Api\UserController@register');
-//Route::post('auth/login', 'App\Http\Controllers\Api\UserController@login');
+Route::post('register', 'App\Http\Controllers\Api\AuthController@register');
+//$response = Http::asForm()->post('http://localhost/api/register', 'App\Http\Controllers\Api\AuthController@register'
+//);
+//
+//    return $response->json();
+
+Route::post('auth/login', 'App\Http\Controllers\Api\AuthController@login');
 
 Route::group(['auth:api'],function (){
     // GeT Full Products

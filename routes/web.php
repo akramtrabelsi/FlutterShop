@@ -28,7 +28,7 @@ Route::get('/', function () {
 
 Auth::routes([]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', '\App\Http\Controllers\HomeController@index')->name('home');
 
 /*Route::get('test_email',function (){
     return 'hello';
@@ -74,7 +74,7 @@ Route::group(['auth', 'user_is_admin'], function () {
 
 
     //countries
-    Route::get('countries', '\App\Http\Controllers\CountryController@index')->name('countries');
+//    Route::get('countries', '\App\Http\Controllers\CountryController@index')->name('countries');
     //cities
     Route::get('cities', '\App\Http\Controllers\CityController@index')->name('cities');
     //states
@@ -90,22 +90,3 @@ Route::group(['auth', 'user_is_admin'], function () {
     //roles
     Route::get('roles', '\App\Http\Controllers\RoleController@index')->name('roles');
 });
-
-
-
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
